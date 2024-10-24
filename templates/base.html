@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pl">
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta charset="UTF-8">
+        <title>Węże i drabiny</title>
+        <style>
+            body {
+                background-color: #ffd480;
+            }
+            table, th, td {
+                border: 3px solid #660000;
+                border-collapse: collapse;
+                color: #660000;
+            }
+            table {
+                width: 50%;
+                height: 200px;
+                margin: 30px auto auto;
+            }
+            td {
+                width: 30px;
+                height: 30px;
+                text-align: center;
+                font-weight: bold;
+                font-size: 120%;
+                background-color: #ffa64d;
+            }
+            .button a {
+                background-color: #0052cc;
+                color: white;
+                padding: 10px 10px;
+                width: 20%;
+                text-decoration: none;
+                font-size: 120%;
+            }
+            .tura {
+                font-size: 130%;
+                text-align: center;
+            }
+        </style>
+        {% block head %} {% endblock %}
+	</head>
+	<body>
+        {% block body %} {% endblock %}
+	</body>
+</html>

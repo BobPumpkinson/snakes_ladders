@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block head %}
+{% endblock %}
+
+{% block body %}
+    <h1 style="text-align: center;">Węże i drabiny</h1>
+    <p class="tura">Koniec gry</p>
+    {% if session["mode"] == 1 %}
+        {% if session["winner"] == 1 %}
+            <h1 style="text-align: center;">Wygrałeś!</h1>
+        {% elif session["winner"] == 2 %}
+            <h1 style="text-align: center;">Przegrałeś!</h1>
+        {% endif %}
+    {% elif session["mode"] == 2 %}
+        {% if session["winner"] == 1 %}
+            <h1 style="text-align: center;">Wygrał gracz 1!</h1>
+        {% elif session["winner"] == 2 %}
+            <h1 style="text-align: center;">Wygrał gracz 2!</h1>
+        {% endif %}
+    {% endif %}
+
+    <p style="text-align: center;"><b>Pionek x1: {{ session["player_positions"]["x1"] }} &emsp; Pionek x2: {{ session["player_positions"]["x2"] }}</b></p>
+    <p style="text-align: center;"><b>Pionek y1: {{ session["player_positions"]["y1"] }} &emsp; Pionek y2: {{ session["player_positions"]["y2"] }}</b></p>
+
+    {% set board = session["board"] %}
+    <table>
+
+    {% set x = namespace(value=0) %}
+    {% for i in range(10) %}
+        <tr>
+        {% for j in range(10) %}
+            {% if board[x.value] == "x1" or board[x.value] == "x2" %}
+                <td style="background-color: #0099ff">{{ board[x.value] }}</td>
+            {% elif board[x.value] == "y1" or board[x.value] == "y2" %}
+                <td style="background-color: red">{{ board[x.value] }}</td>
+            {% elif board[x.value]|string in session["snakes_ladders"] %}
+                {% if session["snakes_ladders"][x.value|string] > x.value %}
+                    <td style="background-color: #5dd55d">{{ board[x.value] }} -> {{ session["snakes_ladders"][x.value|string] }}</td>
+                {% else %}
+                    <td style="background-color: #ff704d">{{ board[x.value] }} -> {{ session["snakes_ladders"][x.value|string] }}</td>
+                {% endif %}
+            {% else %}
+                <td>{{ board[x.value] }}</td>
+            {% endif %}
+            {% set x.value = x.value + 1 %}
+        {% endfor %}
+        </tr>
+    {% endfor %}
+    </table>
+{% endblock %}
